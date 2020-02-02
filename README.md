@@ -26,7 +26,9 @@
 
 * npm init
 
-* npm install gulp -g
+* npm install gulp -g & npm install --save-dev gulp-util
+
+* npm install --save-dev gulp-babel@7.0.1 babel-cli babel-core babel-preset-es2015 // 安装 babel 模块, 支持ES5语法
 
 * npm run dev // [gulp]
 

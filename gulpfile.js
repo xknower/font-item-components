@@ -2,6 +2,8 @@
 const Gulp = require("gulp");
 const FileInclude = require("gulp-file-include");
 const Config = require("./config.js");
+//
+const babel = require('gulp-babel');
 
 const Dist = "build/";
 Gulp.task("copy-html", () => {
@@ -42,8 +44,16 @@ Gulp.task("copy-html-view", () => {
 const Uglify = require("gulp-uglify");
 Gulp.task("copy-js", () => {
   Gulp.src("src/js/**")
+    // es5 检查
+    .pipe(babel({
+      presets: ['es2015']
+    }))
     // 压缩js
     .pipe(Uglify())
+    .on('error', function(err) {
+      // 输出详细错误日志
+      gutil.log(gutil.colors.red('[Error]'), err.toString());
+  })
     // 拷贝
     .pipe(Gulp.dest(Dist + "/js"));
 });

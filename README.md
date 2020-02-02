@@ -1,8 +1,14 @@
-# pro init & gulp
- 
- ```  快速构建简单项目原型
+# font-item-components
 
-   自动热构建 各项资源
+- [参考](https://zhuanlan.zhihu.com/p/25398176)
+
+ ```  简单案例 - 学习并实现 React 组件 模块化 
+
+ > 01 简单应用案例 [点赞功能]
+
+ > 02 实现可复用性 [结构可复用 , 生成 DOM 元素并且添加事件]
+
+ > 03 抽象出 Component 类
 
  ```
 
@@ -10,10 +16,8 @@
 |--build
 |--node_modules
 |--src
-   |--resources   // 资源目录, 包含图片和模型资源等
    |--js
       |--index.js
-   |--view        // 视图页面目录
    |--index.html  // 主页面
 |--.gitignore
 |--README.md

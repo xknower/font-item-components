@@ -23,23 +23,6 @@ Gulp.task("copy-html", () => {
     .pipe(Gulp.dest(Dist));
 });
 
-Gulp.task("copy-html-view", () => {
-  return Gulp.src("src/view/**")
-    .pipe(
-      FileInclude({
-        // HTML模板替换，具体用法见下文
-        prefix: "##",
-        basepath: "@file"
-      })
-    )
-    .on("error", function(err) {
-      console.error("Task:copy-html-view,", err.message);
-      this.end();
-      // 拷贝
-    })
-    .pipe(Gulp.dest(Dist + "/view/"));
-});
-
 // 02 打包 JS文件
 const Uglify = require("gulp-uglify");
 Gulp.task("copy-js", () => {
@@ -56,16 +39,6 @@ Gulp.task("copy-js", () => {
   })
     // 拷贝
     .pipe(Gulp.dest(Dist + "/js"));
-});
-
-Gulp.task("copy-js-resources", () => {
-  return Gulp.src("src/resources/**")
-    .on("error", function(err) {
-      console.error("copy-js-resources,", err.message);
-      this.end();
-      // 拷贝
-    })
-    .pipe(Gulp.dest(Dist + "/view/resources/"));
 });
 
 // 05 开启本地 HTTP 服务器 -> 监听 build 目录变化实现浏览器自动刷新
@@ -90,11 +63,9 @@ Gulp.task("web-server", () => {
 const Watch = require("gulp-watch");
 Gulp.task("watch", () => {
   // 监听HTML变化
-  Gulp.watch("src/view/**", ["copy-html"]);
+  Gulp.watch("src/**/**.html", ["copy-html"]);
   // 监听js变化
   Gulp.watch("src/js/**", ["copy-js"]);
-  //
-  Gulp.watch("src/resources/*", ["copy-js-resources"]);
 });
 
 // 07 自动清理
@@ -107,8 +78,6 @@ Gulp.task("clean", () => {
 Gulp.task("copy-sources", [
   "copy-js",
   "copy-html",
-  "copy-html-view",
-  "copy-js-resources"
 ]);
 
 // RunSequence是用来设置任务串行执行, 因为有些任务是有先后顺序依赖，[]内的并行执行，()内的串行执行
